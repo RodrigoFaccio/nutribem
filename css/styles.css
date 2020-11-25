@@ -1,0 +1,36 @@
+.botao {
+  background-color: #33cc33;
+  border: none;
+  border-radius: 20px;
+  width: 60%;
+  height: 100px;
+  margin-top: 20px;
+  max-width: 100%;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 20%;
+  font-size: 2vh;
+}
+.main {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.btn-padrao {
+  background-color: #33cc33;
+  border: none;
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+}
+.logo {
+  background-color: #33cc33;
+  margin-top: -5px;
+}
+.logo img {
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+}
