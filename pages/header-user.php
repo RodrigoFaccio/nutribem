@@ -8,17 +8,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
-<?php 
-session_start() ;
-if(empty($_SESSION['clogin'])){
-	header('Location:');
-}
-?>
-<div class="logo">
-<img src="assets/barra.jpeg"  class="barra img-fluid" alt="">
-
-<img style="width: 40px;  margin-top:-50px;" onclick="history.go(-1)" src="assets/seta.png" alt="">
+<?php session_start() ?>
+<div class="banner">
+	<img src="assets/banner.jpeg" class="img-fluid" alt="">
 </div>
+
 <br>
 
 <body>

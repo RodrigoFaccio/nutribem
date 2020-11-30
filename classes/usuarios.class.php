@@ -45,6 +45,8 @@ class Usuarios {
 
 		if($sql->rowCount() > 0) {
 			$dado = $sql->fetch();
+			$_SESSION['cLogin']=$dado['id'];
+
 			$_SESSION['cLogindistribuidor'] = $dado['id'];
 			return true;
 		} else {
@@ -67,7 +69,9 @@ class Usuarios {
 		if($sql->rowCount() > 0) {
 			$dado = $sql->fetch();
 			echo 1;
+			$_SESSION['cLogin']=$dado['id'];
 			$_SESSION['cLoginrevendedor'] = $dado['id'];
+
 			return true;
 		} else {
 			return false;

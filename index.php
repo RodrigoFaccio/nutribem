@@ -5,10 +5,10 @@
 <br><br><br><br><br><br>
 <script type="text/javascript">
     function distribuidor (){
-        window.location.href="distribuidor.php";
+        window.location.href="login-distribuidor.php";
     }
     function revendedor (){
-        window.location.href="distribuidor.php";
+        window.location.href="login-revendedor.php";
     }
 </script>
 <div class="container ">
@@ -24,3 +24,4 @@
         </div>
     </div>
 </div>
+<?php require 'pages/footer.php'; ?>

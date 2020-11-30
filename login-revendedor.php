@@ -1,4 +1,6 @@
-<?php require 'pages/header.php'; ?>
+<?php require 'pages/header.php'; 
+
+?>
 <br><br>
 
 <div class="container">
@@ -12,7 +14,7 @@
 
 		if($u->loginRevendedor($email, $senha)) {
 			?>
-			<script type="text/javascript">window.location.href="revendedor.php";</script>
+			<script type="text/javascript">window.location.href="index-vendas.php?p=inicio	";</script>
 			<?php
 		} else {
 			?>
