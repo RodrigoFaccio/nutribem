@@ -3,14 +3,13 @@ require './pages/header.php';
 require 'classes/produtos.class.php';
 $categoria =(string)'bovino';
 
-if(empty($_SESSION['cLogin'])) {
+if(empty($_SESSION['cLoginrevendedor'])&& empty($_SESSION['cLogindistribuidor']) ) {
 	?>
 	<script type="text/javascript">window.location.href="index.php";</script>
 	<?php
 	exit;
 }
 $p = new Produtos ();
-
 
 
     $categoria=$_GET['c'];

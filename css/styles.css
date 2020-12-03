@@ -28,11 +28,12 @@
 .logo {
   background-color: #33cc33;
   margin-top: -5px;
-}
-.logo img {
   justify-content: center;
   align-self: center;
   text-align: center;
+}
+.logo img {
+  width: 100px;
 }
 
 .banner img {
@@ -43,16 +44,17 @@
   background-color: #095d33;
   margin-top: -25px;
   height: 50px;
+
   text-align: center;
   justify-content: center;
 }
+
 .menu a {
   list-style: none;
   color: white;
   list-style: none;
   text-decoration: none;
   width: 50px;
-  font-size: 20px;
   text-transform: uppercase;
   margin-top: 10px;
 }
@@ -63,10 +65,17 @@
   width: 100px;
   padding: 10px;
 }
-.row a {
-  margin-top: 10px;
-  font-size: 20px;
+@media only screen and (max-width: 350px) {
+  a {
+    font-size: 16px;
+  }
 }
+@media only screen and (min-width: 350px) {
+  a {
+    font-size: 20px;
+  }
+}
+
 .espaco {
   height: 10px;
 }
@@ -125,7 +134,7 @@ li:hover {
   float: right;
   color: #9c9c9c;
   font-weight: 500;
-  font-size: 1.2em;
+  font-size: 1em;
   line-height: 1.65em;
 }
 .img-unico {
@@ -138,4 +147,7 @@ li:hover {
 }
 .descricao {
   text-align: center;
+}
+.bg {
+  background-color: #33cc33;
 }

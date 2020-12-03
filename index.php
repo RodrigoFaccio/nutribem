@@ -19,7 +19,8 @@
             </button>
             <button type="button" onclick="revendedor();" class=" botao">
                 REVENDEDOR  
-            </button>
+            </button><br>
+            <a style="font-size: 14px; margin-left:40%; " href="cadastre-se.php"> Cadastrar</a>
 
         </div>
     </div>

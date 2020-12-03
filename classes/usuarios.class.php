@@ -10,7 +10,20 @@ class Usuarios {
 		return $row['c'];
 	}
 
-	public function cadastrar($nome, $email, $senha ) {
+	public function getUsuario($id){
+		global $pdo;
+
+		$sql = $pdo->query("SELECT * FROM usuarios 	WHERE id= $id ");
+		if($sql->rowCount() > 0) {
+
+			$array = $sql->fetch();
+		}
+
+		return $array;
+
+
+	}
+	public function cadastrar($nome, $email, $senha,$contratante,$telefone,$cnpj,$cpf,$endereco) {
 		global $pdo;
 		$sql = $pdo->prepare("SELECT id FROM usuarios WHERE email = :email");
 		$sql->bindValue(":email", $email);
@@ -18,10 +31,22 @@ class Usuarios {
 
 		if($sql->rowCount() == 0) {
 
-			$sql = $pdo->prepare("INSERT INTO usuarios SET contratante = :nome, email = :email, senha = :senha ");
+			$sql = $pdo->prepare("INSERT INTO usuarios SET contratante = :contratante, email = :email, senha = :senha,
+			endereco = :endereco, nome = :nome, cpf= :cpf, cnpj = :cnpj, telefone = :telefone, adm = :adm");
+			$sql->bindValue(":contratante", $contratante);
 			$sql->bindValue(":nome", $nome);
 			$sql->bindValue(":email", $email);
 			$sql->bindValue(":senha", md5($senha));
+			$sql->bindValue(":endereco", $endereco);
+			$sql->bindValue(":cpf", $cpf);
+			$sql->bindValue(":cnpj", $cnpj);
+			$sql->bindValue(":telefone", $telefone);
+			$sql->bindValue(":adm", 0);
+
+
+
+
+			
 			$sql->execute();
 
 			return true;
@@ -33,10 +58,12 @@ class Usuarios {
 	}
 
 	public function loginDistribuidor($email, $senha) {
+
+		
 		global $pdo;
 		$distribuidor ="distribuidor";
 
-		$sql = $pdo->prepare("SELECT id FROM usuarios WHERE email = :email AND senha = :senha AND contratante = :contratante");
+		$sql = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email AND senha = :senha AND contratante = :contratante");
 		$sql->bindValue(":email", $email);
 		$sql->bindValue(":contratante", $distribuidor);
 
@@ -45,7 +72,16 @@ class Usuarios {
 
 		if($sql->rowCount() > 0) {
 			$dado = $sql->fetch();
-			$_SESSION['cLogin']=$dado['id'];
+			$adm =$dado['a'];
+			if($adm==1){
+				$_SESSION['cLogin']='adm';
+
+			}else{
+				$_SESSION['cLogin']='';
+
+
+			}
+			
 
 			$_SESSION['cLogindistribuidor'] = $dado['id'];
 			return true;
@@ -67,9 +103,19 @@ class Usuarios {
 		$sql->execute();
 
 		if($sql->rowCount() > 0) {
+			
 			$dado = $sql->fetch();
-			echo 1;
-			$_SESSION['cLogin']=$dado['id'];
+			$adm = (int) $dado['a'];
+			$adm =$dado['a'];
+			if($adm==1){
+				$_SESSION['cLogin']='adm';
+
+			}else{
+				$_SESSION['cLogin']='';
+
+
+			}
+			
 			$_SESSION['cLoginrevendedor'] = $dado['id'];
 
 			return true;

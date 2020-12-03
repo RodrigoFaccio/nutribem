@@ -14,7 +14,7 @@
 
 		if($u->loginRevendedor($email, $senha)) {
 			?>
-			<script type="text/javascript">window.location.href="index-vendas.php?p=inicio	";</script>
+			<script type="text/javascript">window.location.href="index-vendas-revendedor.php?p=inicio	";</script>
 			<?php
 		} else {
 			?>
@@ -28,7 +28,7 @@
 	<form method="POST">
 		<div class="form-group">
 			<label for="email">E-mail:</label>
-			<input type="email" name="email" id="email" class="form-control" />
+			<input type="email" name="email" id="email" value="admrevendedor@gmail.com" class="form-control" />
 		</div>
 		<div class="form-group">
 			<label for="senha">Senha:</label>

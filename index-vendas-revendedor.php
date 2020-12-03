@@ -6,6 +6,7 @@ if(empty($_SESSION['cLoginrevendedor'])) {
 	<?php
 	exit;
 }
+echo $_SESSION['cLogin'];
 ?>
 <div class="menu">
 
@@ -16,13 +17,13 @@ if(empty($_SESSION['cLoginrevendedor'])) {
 			<?php
 				if(@$_GET['p']=="inicio" or @$_GET['p']==""){
 			?>
-				<a class="btn-menu" href="index-vendas
+				<a class="btn-menu" href="index-vendas-revendedor
 				.php?p=inicio">inicios</a>
 			<?php 
 				}else{
 				?>
-					<a class="" href="index-vendas
-					.php?p=inicio">inic</a>
+					<a class="" href="index-vendas-revendedor
+					.php?p=inicio">inicio</a>
 				<?php } ?>
 			
 		</div>
@@ -30,7 +31,7 @@ if(empty($_SESSION['cLoginrevendedor'])) {
 			<?php
 				if(@$_GET['p']=="pedidos"){
 			?>
-			<a class="btn-menu" href="index-vendas
+			<a class="btn-menu" href="index-vendas-revendedor
 			.php?p=pedidos">Pedidos</a>
 
 			
@@ -38,7 +39,7 @@ if(empty($_SESSION['cLoginrevendedor'])) {
 				}else{
 					
 				?>
-			<a href="index-vendas
+			<a href="index-vendas-revendedor
 			.php?p=pedidos">Pedidos</a>
 
 				<?php } ?>
@@ -47,7 +48,7 @@ if(empty($_SESSION['cLoginrevendedor'])) {
 		<?php
 				if(@$_GET['p']=="suporte"){
 			?>
-					<a class="btn-menu" href="index-vendas
+					<a class="btn-menu" href="index-vendas-revendedor
 					.php?p=suporte">Suporte</a>
 
 			
@@ -55,7 +56,7 @@ if(empty($_SESSION['cLoginrevendedor'])) {
 				}else{
 					
 				?>
-					<a  href="index-vendas
+					<a  href="index-vendas-revendedor
 					.php?p=suporte">Suporte</a>
 
 
