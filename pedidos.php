@@ -24,7 +24,7 @@ $pedidos = $ped->getPedido($id);
    <?php foreach($pedidos as $pedido): 
         $produto = $pro->getProduto2($pedido['produto']);
     ?>         
-<a href="produto-unico.php?id=<?php echo $pedido['id']  ?>">
+<a href="mais-info-pedido-cliente.php?id=<?php echo $pedido['id']  ?>" style="color:green; ">
 <ul class="lista">
   <li>
   <div class="foto">
@@ -35,8 +35,9 @@ $pedidos = $ped->getPedido($id);
       <span class="preco">R$ <?php echo $pedido['valor']?>,00</span>
        
       
-        
       <p class="titulo" ><?php echo $produto['nome']?></p>
+      <p class="descricao"><?php echo $pedido['estado']?></p> 
+
       
     </div>
   </li>

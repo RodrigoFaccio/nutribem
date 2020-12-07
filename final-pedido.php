@@ -71,7 +71,7 @@
 
 	<div class="form-group">
 			<label for="nome">Observação:</label>
-			<input type="text" name="nome" id="nome" class="form-control" />
+			<input type="text" name="obs" id="nome" class="form-control" />
 		</div>
 		
 		

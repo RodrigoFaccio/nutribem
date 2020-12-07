@@ -23,6 +23,26 @@ class Usuarios {
 
 
 	}
+	public function editarUsuario($nome,$cpf,$endereco,$telefone,$categoria,$id){
+
+		global $pdo;
+
+        $sql = $pdo->prepare("UPDATE  usuarios SET contratante = :contratante, nome =:nome, endereco = :endereco, cpf =:cpf,telefone =:telefone WHERE id = $id ");
+            $sql->bindValue(":nome", $nome);
+			$sql->bindValue(":contratante", $categoria);
+			$sql->bindValue(":cpf", $cpf);
+			$sql->bindValue(":endereco", $endereco);
+			$sql->bindValue(":telefone", $telefone);
+
+
+
+            
+          
+            $sql->execute();
+
+			return true;
+
+	}
 	public function cadastrar($nome, $email, $senha,$contratante,$telefone,$cnpj,$cpf,$endereco) {
 		global $pdo;
 		$sql = $pdo->prepare("SELECT id FROM usuarios WHERE email = :email");

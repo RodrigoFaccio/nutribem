@@ -1,5 +1,11 @@
 <?php 
 require 'pages/header-adm.php';
+require 'classes/produtos.class.php';
+require 'classes/pedidos.class.php';
+require 'classes/usuarios.class.php';
+
+
+
 if(empty($_SESSION['cLogin'])) {
 	?>
 	<script type="text/javascript">window.location.href="/nutribem";</script>
@@ -8,8 +14,12 @@ if(empty($_SESSION['cLogin'])) {
 }
 
 
-require 'classes/produtos.class.php';
 $p = new Produtos();
+$u = new Usuarios();
+$ped = new Pedidos();
+
+
+
 
 
 ?>
@@ -30,20 +40,24 @@ $p = new Produtos();
     <table class="table">
   <thead>
     <tr>
-      <th scope="col">Nome</th>
-      <th scope="col">Valor Distribuidor</th>
-      <th scope="col">Valor Revendedor</th>
-      <th scope="col">Editar</th>
-      <th scope="col">Deletar</th>
+      <th scope="col">Nome Produto</th>
+      <th scope="col">Nome comprador</th>
+      <th scope="col">Quantidade </th>
+      <th scope="col">Valor</th>
+      <th scope="col">Mais infromações </th>
 
     </tr>
   </thead>
   <tbody>
   <?php
       
-      $produtos = $p->getProdutos();
+      $pedidos = $ped->getPedidos();
   
-      foreach($produtos as $produto):
+      foreach($pedidos as $pedido):
+        $produto = $p->getProduto2($pedido['produto']);
+        $usuario = $u->getUsuario($pedido['id_vendedor']);
+
+
       ?>
     <tr>
       
@@ -51,16 +65,18 @@ $p = new Produtos();
           <?php echo $produto['nome'] ?>
         </td>
         <td>
-          <?php echo $produto['preco_distribuidor'] ?>
+          <?php echo $usuario['nome'] ?>
         </td>
         <td>
-          <?php echo $produto['preco_revendedor'] ?>
+          <?php echo $pedido['quantidade'] ?>
         </td>
         <td>
-          <a href="editar-produto.php?id=<?php echo $produto['id'] ?>" class="btn btn-warning"><img src="https://img.icons8.com/material-sharp/24/000000/edit.png"/></a>
+        R$<?php echo $pedido['valor'] ?>,00
+
         </td>
         <td>
-          <a href="deletar-produto.php?id=<?php echo $produto['id'] ?>"class="btn btn-danger">X</a>
+        <a href="mais-info-pedido.php?id=<?php echo $pedido['id'] ?>">Mais informações</a>
+
         </td>
         
         

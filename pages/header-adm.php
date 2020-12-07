@@ -25,7 +25,8 @@ require 'config.php';
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link " href="produtos-dash.php?p=">Produtos</a>
-      <a class="nav-item nav-link" href="cadastro-produtos.php?p=cadastro">Cadastrar produtos </a>
+      <a class="nav-item nav-link" href="cadastro-produtos.php">Cadastrar produtos </a>
+      <a class="nav-item nav-link" href="pedidos-dash.php">Pedidos </a>
       
     </div>
   </div>
@@ -39,7 +40,7 @@ $menu = @$_GET['p'];
 
 
 
-if(empty(@$_GET['p'])){
+if(!empty(@$_GET['p'])){
 	sleep(1);
 
 	require_once('produtos-dash.php');
@@ -48,6 +49,8 @@ if($menu=="cadastro"){
 	require_once('cadastro-produtos.php');
 
 }
+
+
 ?>
   
 </body>
