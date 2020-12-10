@@ -1,22 +1,30 @@
 <?php 
 require 'pages/header-adm.php';
-require 'classes/produtos.class.php';
-require 'classes/pedidos.class.php';
+
 require 'classes/usuarios.class.php';
+$u = new Usuarios();
+
 
 
 
 if(empty($_SESSION['cLogin'])) {
 	?>
-	<script type="text/javascript">window.location.href="/nutribem";</script>
+	
 	<?php
 	exit;
 }
+if($_GET['id']){
+    if($u->aceitarUser($_GET['id'])){
+        ?>
+        	<strong>Usuário aceito com sucesso </strong>
+
+        <?php
+
+    }
+}
 
 
-$p = new Produtos();
-$u = new Usuarios();
-$ped = new Pedidos();
+
 
 
 
@@ -40,45 +48,40 @@ $ped = new Pedidos();
     <table class="table">
   <thead>
     <tr>
-      <th scope="col">Nome Produto</th>
-      <th scope="col">Nome comprador</th>
-      <th scope="col">Quantidade </th>
-      <th scope="col">Valor</th>
-      <th scope="col">Mais infromações </th>
+      <th scope="col">Usuario</th>
+      <th scope="col">CPF</th>
+      <th scope="col">E-mail</th>
+      <th scope="col">Aceitar</th>
 
     </tr>
   </thead>
   <tbody>
   <?php
       
-      $pedidos = $ped->getPedidos();
+     $usuarios = $u->getUsuarios();
   
-      foreach($pedidos as $pedido):
-        $produto = $p->getProduto2($pedido['id_produto']);
-        $usuario = $u->getUsuario($pedido['id_vendedor']);
+      foreach($usuarios as $usuario):
+       
 
 
       ?>
     <tr>
       
         <td>
-        <?php echo $produto['nome'] ?>
+        <?php echo $usuario['nome'] ?>
 
         </td>
         <td>
-          <?php echo $usuario['nome'] ?>
+          <?php echo $usuario['cpf'] ?>
         </td>
         <td>
-          <?php echo $pedido['quantidade'] ?>
+          <?php echo $usuario['email'] ?>
         </td>
         <td>
-        R$<?php echo $pedido['valor'] ?>,00
+       <a href="solicitacoes-dash.php?id=<?php echo $usuario['id'] ?>">Aceitar</a>
 
         </td>
-        <td>
-        <a href="mais-info-pedido.php?id=<?php echo $pedido['id'] ?>">Mais informações</a>
-
-        </td>
+       
         
         
     </tr>

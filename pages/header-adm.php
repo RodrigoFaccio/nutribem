@@ -27,6 +27,8 @@ require 'config.php';
       <a class="nav-item nav-link " href="produtos-dash.php?p=">Produtos</a>
       <a class="nav-item nav-link" href="cadastro-produtos.php">Cadastrar produtos </a>
       <a class="nav-item nav-link" href="pedidos-dash.php">Pedidos </a>
+      <a class="nav-item nav-link" href="solicitacoes-dash.php">Solicitações </a>
+
       
     </div>
   </div>

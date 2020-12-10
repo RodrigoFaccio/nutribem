@@ -22,7 +22,7 @@ if(empty($_SESSION['cLogin'])) {
 
     $pedidos = $ped->getPedidoInfo($id_produto);
     $usuario = $u->getUsuario($pedidos['id_vendedor']);
-    $produto = $p->getProduto2($pedidos['produto']);
+    $produto = $p->getProduto2($pedidos['id_produto']);
 
     
 

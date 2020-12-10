@@ -13,19 +13,60 @@ $p = new Produtos ();
 
 
     $categoria=$_GET['c'];
+  if($categoria=='bovino'){
+    ?>
+    <a href="produtos.php?c=bovino proteico">
+      <li>
+          <ul class="lista">
+           
+                <p class="titulo">Protéico</p>
+                
+              </div>
+            
+            
+          </ul>
+          </li>
 
-    $produtos = $p->produtosDistribuidor($categoria);
-    foreach($produtos as $produto){
-        if($produto['categoria']==$categoria){
+      </a>
+      <a href="produtos.php?c=bovino mineirais">
+          <ul class="lista">
+          <li>
+          <ul class="lista">
+           
+                <p class="titulo">Mineirais</p>
+                
+              </div>
             
             
+          </ul>
+          </li>
+            
+            
+          </ul>
+      </a>
+
+    <?php
+  }else{
+    
+
+   
+            
+  $produtos = $p->produtosDistribuidor($categoria);
+  foreach($produtos as $produto){
+      if($produto['categoria']==$categoria){
+
+        $imagens = $p->getImage($produto['id']);
+        foreach($imagens as $img){
+          $img =  $img['url'];
+        }
+  
         
 ?>
 <a href="produto-unico.php?id=<?php echo $produto['id']  ?>">
 <ul class="lista">
   <li>
   <div class="foto">
-      <img src="assets/saco_racao.jpg">
+      <img src="assets/images/produtos/<?php echo $img ?>">
     </div>
     <div class="conteudo">
         <?php
@@ -54,5 +95,7 @@ $p = new Produtos ();
     
 }
 }
+}
+
 ?>
 <?php require 'pages/footer.php'; ?>

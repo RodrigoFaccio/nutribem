@@ -43,7 +43,7 @@ class Usuarios {
 			return true;
 
 	}
-	public function cadastrar($nome, $email, $senha,$contratante,$telefone,$cnpj,$cpf,$endereco) {
+	public function cadastrar($nome, $email, $senha,$vendedor,$telefone,$cpf,$endereco) {
 		global $pdo;
 		$sql = $pdo->prepare("SELECT id FROM usuarios WHERE email = :email");
 		$sql->bindValue(":email", $email);
@@ -52,14 +52,13 @@ class Usuarios {
 		if($sql->rowCount() == 0) {
 
 			$sql = $pdo->prepare("INSERT INTO usuarios SET contratante = :contratante, email = :email, senha = :senha,
-			endereco = :endereco, nome = :nome, cpf= :cpf, cnpj = :cnpj, telefone = :telefone, adm = :adm");
-			$sql->bindValue(":contratante", $contratante);
+			endereco = :endereco, nome = :nome, cpf= :cpf,  telefone = :telefone, a = :adm");
+			$sql->bindValue(":contratante", $vendedor);
 			$sql->bindValue(":nome", $nome);
 			$sql->bindValue(":email", $email);
 			$sql->bindValue(":senha", md5($senha));
 			$sql->bindValue(":endereco", $endereco);
 			$sql->bindValue(":cpf", $cpf);
-			$sql->bindValue(":cnpj", $cnpj);
 			$sql->bindValue(":telefone", $telefone);
 			$sql->bindValue(":adm", 0);
 
@@ -74,7 +73,6 @@ class Usuarios {
 		} else {
 			return false;
 		}
-
 	}
 
 	public function loginDistribuidor($email, $senha) {
@@ -83,7 +81,7 @@ class Usuarios {
 		global $pdo;
 		$distribuidor ="distribuidor";
 
-		$sql = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email AND senha = :senha AND contratante = :contratante");
+		$sql = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email AND senha = :senha AND contratante = :contratante ");
 		$sql->bindValue(":email", $email);
 		$sql->bindValue(":contratante", $distribuidor);
 
@@ -93,8 +91,9 @@ class Usuarios {
 		if($sql->rowCount() > 0) {
 			$dado = $sql->fetch();
 			$adm =$dado['a'];
-			if($adm==1){
+			if($adm==2){
 				$_SESSION['cLogin']='adm';
+				header('Location:produtos-dash.php');
 
 			}else{
 				$_SESSION['cLogin']='';
@@ -104,7 +103,7 @@ class Usuarios {
 			
 
 			$_SESSION['cLogindistribuidor'] = $dado['id'];
-			return true;
+			return $dado;
 		} else {
 			return false;
 		}
@@ -115,7 +114,7 @@ class Usuarios {
 		$revendedor ="revendedor";
 
 
-		$sql = $pdo->prepare("SELECT id FROM usuarios WHERE email = :email AND senha = :senha AND contratante = :contratante");
+		$sql = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email AND senha = :senha AND contratante = :contratante ");
 		$sql->bindValue(":email", $email);
 		$sql->bindValue(":contratante", $revendedor);
 
@@ -125,10 +124,13 @@ class Usuarios {
 		if($sql->rowCount() > 0) {
 			
 			$dado = $sql->fetch();
+			
 			$adm = (int) $dado['a'];
 			$adm =$dado['a'];
-			if($adm==1){
+			if($adm==2){
 				$_SESSION['cLogin']='adm';
+				header('Location:produtos-dash.php');
+
 
 			}else{
 				$_SESSION['cLogin']='';
@@ -138,14 +140,95 @@ class Usuarios {
 			
 			$_SESSION['cLoginrevendedor'] = $dado['id'];
 
-			return true;
+			return $dado;
+
 		} else {
 			return false;
 		}
 
 	}
+	public function recuperarSenha($email)
+	{
+		global $pdo;
 
 
+		$sql = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email ");
+		$sql->bindValue(":email", $email);
+		$sql->execute();
+
+		if($sql->rowCount() > 0) {
+			$dado = $sql->fetch();
+
+		
+			
+
+			return $dado;
+		} else {
+			return false;
+		}
+
+		# code...
+	}
+public function cadastrarSenha($senha,$rash)
+{
+	echo $rash;
+	echo $senha;
+	global $pdo;
+
+
+		$sql = $pdo->prepare("UPDATE  usuarios SET senha=:senha WHERE senha = :rash ");
+		$sql->bindValue(":senha", md5($senha));
+		$sql->bindValue(":rash", $rash);
+
+		$sql->execute();
+		return true;
+
+	
+}
+public function getUsuarios()
+{
+	# code...
+	global $pdo;
+
+		$sql = $pdo->query("SELECT * FROM usuarios WHERE a=0 ");
+		if($sql->rowCount() > 0) {
+
+			$array = $sql->fetchAll();
+		}
+
+		return $array;
+}
+public function aceitarUser($id)
+{
+	global $pdo;
+
+
+		$sql = $pdo->prepare("UPDATE  usuarios SET a=1 WHERE id= $id ");
+		
+
+		$sql->execute();
+		return true;
+	# code...
+}
+function verificarUser($id)
+{
+	# code...
+	global $pdo;
+
+
+
+	$sql = $pdo->prepare("SELECT * FROM usuarios WHERE id = $id");
+	
+	$sql->execute();
+	$array = $sql->fetch();
+	
+
+	if($array['a']!=0){
+		return true;
+	}else{
+		return false;
+	}
+}
 
 
 

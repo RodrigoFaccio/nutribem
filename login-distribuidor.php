@@ -10,10 +10,19 @@
 		$email = addslashes($_POST['email']);
 		$senha = $_POST['senha'];
 
-		if($u->loginDistribuidor($email, $senha)) {
-			?>
-			<script type="text/javascript">window.location.href="index-vendas-distribuidor.php?p=inicio";</script>
+		if($adm = $u->loginDistribuidor($email, $senha)) {
+			if($u->verificarUser($adm['id'])){
+				?>
+			<script type="text/javascript">window.location.href="index-vendas-distribuidor.php?p=inicio	";</script>
 			<?php
+			}else{
+				?>
+			<div class="alert alert-warning">
+				Perfil ainda não aceito!
+			</div>
+			<?php
+			}
+			
 		} else {
 			?>
 			<div class="alert alert-danger">
@@ -21,6 +30,14 @@
 			</div>
 			<?php
 		}
+		
+		
+		
+		
+			
+		
+		
+	
 	}
 	?>
 	<form method="POST">
@@ -32,6 +49,7 @@
 			<label for="senha">Senha:</label>
 			<input type="password" name="senha" id="senha" class="form-control" />
 		</div>
+		<a href="recuperar-senha.php">Recuperar senha </a>
 <div class="main">
 
 		<input type="submit" value="Fazer Login" class=" btn-padrao" />

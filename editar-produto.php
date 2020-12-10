@@ -21,11 +21,11 @@ $id=$_GET['id'];
 		$composicao = addslashes($_POST['composicao']);
         $valor_revendedor = addslashes($_POST['valor_revendedor']);
 		$valor_distribuidor = addslashes($_POST['valor_distribuidor']);
-        
+        $fotos = $_FILES['fotos'];
 		$categoria = addslashes($_POST['categoria']);
         
         if($p->editarProduto($nome,$uso,$composicao,$valor_distribuidor,$valor_revendedor,$categoria,$id)){
-            
+            $p->addImage($fotos,$id);
 		
 		?>
 			<div class="alert alert-success" role="alert">
@@ -45,7 +45,8 @@ $id=$_GET['id'];
     
 
     
-<form method="POST">
+<form method="POST"  enctype="multipart/form-data">
+
 		<div class="form-group">
 			<label for="nome">Nome:</label>
 			<input type="text" value="<?php echo $produto['nome'] ?>" name="nome" id="nome" class="form-control" />
@@ -60,26 +61,66 @@ $id=$_GET['id'];
 		</div>
         <div class="form-group">
 			<label for="valor">Valor revendedor:</label>
-			<input type="text" name="valor_revendedor" value="<?php echo $produto['preco_revendedor'] ?>" id="valor" class="form-control" />
+			<input type="text" placeholder="EX:30" name="valor_revendedor" value="<?php echo $produto['preco_revendedor'] ?>" id="valor" class="form-control" />
         </div>
         <div class="form-group">
 			<label for="valor">Valor distribuidor  :</label>
-			<input type="text" name="valor_distribuidor" id="valor" value="<?php echo $produto['preco_distribuidor'] ?>" class="form-control" />
+			<input type="text" placeholder="EX:30" name="valor_distribuidor" id="valor" value="<?php echo $produto['preco_distribuidor'] ?>" class="form-control" />
 		</div>
         <div class="form-group">
-    <label for="exampleFormControlSelect1">Categoria</label>
-    <select class="form-control" name="categoria" id="exampleFormControlSelect1">
-      <option value="bovino">Bovinos</option>
-      <option value="suino">Suinos</option>
-      <option value="aves">Aves</option>
-      <option value="equino">Equinos</option>
-      <option value="farelos">Farelos</option>
-      <option value="graos">Grãos</option>
+    <label for="exampleFormControlselected1">Categoria</label>
+    <select class="form-control" name="categoria" id="exampleFormControlselected1">
+
+	<?php 
+	if($produto['categoria']=='bovino mineirais'){
+		$bovinom='selected';
+
+	}elseif($produto['categoria']=='bovino proteico'){
+		$bovinop='selected';
+
+	}elseif($produto['categoria']=='suino'){
+		$suino='selected';
+
+	}elseif($produto['categoria']=='aves'){
+		$aves='selected';
+
+	}elseif($produto['categoria']=='equino'){
+		$equino='selected';
+
+	}elseif($produto['categoria']=='farelos'){
+		$farelos='selected';
+
+	}
+	elseif($produto['categoria']=='graos'){
+		$graos='selected';
+
+	}
+	echo $bovinom;
+	
+	?>
+	  <option <?php echo $bovinom ?>  selecteded value="bovino mineirais">Bovinos mineirais</option>
+      <option <?php echo $bovinop ?> value="bovino proteico">Bovinos proteico-energético</option>
+	  
+      <option <?php echo $suino ?> value="suino">Suinos</option>
+      <option <?php echo $aves ?> value="aves">Aves</option>
+      <option <?php echo $equino ?> value="equino">Equinos</option>
+      <option <?php echo $farelos ?> value="farelos">Farelos</option>
+      <option <?php echo $graos ?>value="graos">Grãos</option>
 
     </select>
   </div>
 
 <div class="main">
+<div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file" name="fotos[]" multiple>
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Upload one or more files">
+      </div>
+    </div>
+	
 
 		<input type="submit" value="Cadastrar Produto" class=" btn-padrao" />
 </div>

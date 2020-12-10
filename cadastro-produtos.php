@@ -65,7 +65,9 @@ if(empty($_SESSION['cLogin'])) {
         <div class="form-group">
     <label for="exampleFormControlSelect1">Categoria</label>
     <select class="form-control" name="categoria" id="exampleFormControlSelect1">
-      <option value="bovino">Bovinos</option>
+	  <option value="bovino mineirais">Bovinos mineirais</option>
+      <option value="bovino proteico">Bovinos proteico-energético</option>
+	  
       <option value="suino">Suinos</option>
       <option value="aves">Aves</option>
       <option value="equino">Equinos</option>

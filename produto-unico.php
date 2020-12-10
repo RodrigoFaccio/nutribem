@@ -9,6 +9,10 @@ if(!empty($_POST['valor'])){
 }
 $p = new Produtos();
     $produtos = $p->getProduto($id);
+    $imagens = $p->getImage($id);
+    foreach($imagens as $img){
+      $img =  $img['url'];
+    }
 
     foreach($produtos as $produto){
     }
@@ -17,7 +21,8 @@ $p = new Produtos();
 <div class="container main">
     <div class="row">
         <div class="col ">
-            <img class="img-unico" src="assets/saco_racao.jpg" alt="">
+        <img class="img-unico" src="assets/images/produtos/<?php echo $img ?>">
+
             <hr>
             <?php foreach($produtos as $produto): ?>
             <h2><?php echo $produto['nome'];?></h2>
@@ -91,10 +96,19 @@ $p = new Produtos();
             <h4 id="h1quant">R$00,00</h4>
             
               <input type="submit"  value="Realizar Pedido" class=" btn-padrao" />
-          </div>
+              
+
 
 
       </form>
+      <form action="carrinho.php" method="POST">
+        <input type="checkbox" name="id" hidden="true" checked  value="<?php echo $id ?>" id="">
+        <input type="submit"  value="Carrinho" class=" btn-padrao" />
+        <input type="text" hidden name="quantcar" id="quantcar" />
+        
+      </form>
+      </div>
+
       
       </div>
       
@@ -108,10 +122,14 @@ require './pages/footer.php';
 ?>
 <script>
    async function  f(valor){
-     console.log("oi");
     var quant  = await document.getElementById('quant').value;
 var valorfinal =quant*valor;
+<?php
+
+
+?>
 document.getElementById('h1quant').innerHTML="R$"+valorfinal+",00";
+document.getElementById('quantcar').value=quant;
 
 
      

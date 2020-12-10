@@ -4,7 +4,7 @@
 	<?php
 	require 'classes/usuarios.class.php';
 	$u = new Usuarios();
-	if(!empty($_POST['vendedor']) && !empty($_POST['nome'])&&!empty($_POST['telefone']) && !empty($_POST['cpf']) && !empty($_POST['cnpj']) && !empty($_POST['endereco'])) {
+	if(!empty($_POST['vendedor']) && !empty($_POST['nome'])&&!empty($_POST['telefone']) && !empty($_POST['cpf']) && !empty($_POST['endereco'])) {
 		$nome = addslashes($_POST['nome']);
 		$endereco = addslashes($_POST['endereco']);
 
@@ -12,7 +12,6 @@
 		$email = addslashes($_POST['email']);
 		$telefone = addslashes($_POST['telefone']);
 		$cpf = addslashes($_POST['cpf']);
-		$cnpj = addslashes($_POST['cnpj']);
 		$senha = $_POST['senha'];
 
 
@@ -20,7 +19,7 @@
 		
 
 		if(!empty($nome) && !empty($email) && !empty($senha)) {
-			if($u->cadastrar($nome, $email, $senha,$vendedor,$telefone,$cnpj,$cpf,$endereco)) {
+			if($u->cadastrar($nome, $email, $senha,$vendedor,$telefone,$cpf,$endereco)) {
 				?>
 				<div style="color:green">
 				
@@ -59,9 +58,7 @@
 			<input type="cpf" onkeypress="$(this).mask('000.000.000-00');" name="cpf" id="cpf" class="form-control" />
 		</div>
 		<div class="form-group">
-			<label for="Cnpj">Cnpj:</label>
-			<input type="text" name="cnpj" onkeypress="$(this).mask('000.000.000-00');" id="Cnpj" class="form-control" />
-		</div>
+		
 		<div class="form-group">
 			<label for="endereco">Endereço:</label>
 			<input type="text" name="endereco" id="endereco" class="form-control" />

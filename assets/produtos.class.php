@@ -141,7 +141,7 @@ class Produtos {
 						$origi = imagecreatefromjpeg('assets/images/produtos/'.$tmpname);
 					} elseif($tipo == 'image/png') {
 						$origi = imagecreatefrompng('assets/images/produtos/'.$tmpname);
-                    }
+					}
 
 					imagecopyresampled($img, $origi, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
 
@@ -156,27 +156,7 @@ class Produtos {
 			}
 		}
     }
-    public function getImage($id){
-        global $pdo;
-    
-            $sql = $pdo->query("SELECT * FROM product_image  WHERE id_product = $id");
-            if($sql->rowCount() > 0) {
-                $array = $sql->fetchAll();
-            }
-    
-            return $array;
-        }	
-        public function getTotalUsuarios() {
-            global $pdo;
-    
-            $sql = $pdo->query("SELECT * FROM produtos");
-            if($sql->rowCount() > 0) {
-                $array = $sql->fetchAll();
-            }
-    
-            return $array;
-            
-        }
+
 
 }
 
